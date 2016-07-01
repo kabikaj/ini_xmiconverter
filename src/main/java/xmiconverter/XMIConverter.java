@@ -25,7 +25,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
+//import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
 import webanno.custom.Page;
 import webanno.custom.Section;
 
@@ -118,8 +118,8 @@ public class XMIConverter {
 		    				XmiWriter.PARAM_TARGET_LOCATION, OUTPUT_PATH);
 		    				//XmiWriter.PARAM_TARGET_LOCATION, "target/output_arabic");  //DEBUG
 
-		    		AnalysisEngineDescription dumper = AnalysisEngineFactory.createEngineDescription(
-		    				CasDumpWriter.class);
+		    		//AnalysisEngineDescription dumper = AnalysisEngineFactory.createEngineDescription(
+		    		//		CasDumpWriter.class);
 		
 		    		SimplePipeline.runPipeline(document, segmenter, tagger, writer);
 		    	

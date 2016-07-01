@@ -52,12 +52,10 @@ public class XMIConverter {
 		// get all input files
 		Files.walk(Paths.get(INPUT_PATH)).forEach(filePath ->
 		{
-			
-			System.err.println("Processing file " + filePath.toString()); //DEBUG
-		    
-			//if (Files.isRegularFile(filePath) && filePath.endsWith(".json")) //DEBUB
-		    if (Files.isRegularFile(filePath))
+		    if (Files.isRegularFile(filePath) && filePath.toString().endsWith(".json"))
 		    {
+		    	System.err.println("Processing file " + filePath.toString()); //DEBUG
+		    	
 		    	try {
 		    		JSONParser parser = new JSONParser();
 		    		//Object obj = parser.parse(new FileReader("input_files/arabic_input_example.json")); //DEBUG

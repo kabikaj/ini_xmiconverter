@@ -2,4 +2,4 @@
 .class
 logs/*
 target/maven-archiver/*
-target/class/*
+target/classes/*

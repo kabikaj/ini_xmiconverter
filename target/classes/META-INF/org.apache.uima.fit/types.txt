@@ -1,1 +1,1 @@
-classpath*:desc/type/typeSystemDescriptor.xm
+classpath*:desc/type/typeSystemDescriptor.xml

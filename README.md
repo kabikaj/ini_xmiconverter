@@ -1,4 +1,3 @@
-
 Json to Xmi converter
 =====================
 
@@ -11,5 +10,5 @@ Java program to convert json data extracted from COBHUNI wiki into xmi.
 
 ```sh
 $ mvn clean dependency:copy-dependencies package
-$ java -cp target/dependency/*:target/xmiconverter-0.0.1-SNAPSHOT.jar xmiconverter/XMIConverter
+$ java -cp target/dependency/*:target/xmiconverter-0.0.1-SNAPSHOT.jar xmiconverter/XmiConverter
 ```

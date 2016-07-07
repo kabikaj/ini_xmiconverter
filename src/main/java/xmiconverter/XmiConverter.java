@@ -170,7 +170,7 @@ public class XmiConverter {
 			
 			// skip punctuation
 			String POS = tokObj.getPos().getPosValue(); 
-			if(POS.equals("PUNC")) {  // IN, CC
+			if(POS.equals("PUNC")) {  // IN, CC ??
 				continue;
 			}
 			
@@ -179,26 +179,29 @@ public class XmiConverter {
 			
 			// token is not a valid Arabic word
 			if(!isArabicAlpha(tok, true, true)) {
-				System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (non-Arabic chars in token)");
-				//System.err.println(POS); //DEBUG
+				//System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (non-Arabic chars in token)");
+				System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (non-Arabic chars in token)" + "[" + POS + "]"); //DEBUG
+				continue; // show token only once
 			}
 			    
             // exceeds max length
             if(toklen > MAX_LEN_TOK) {
-            	System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (word too long)");
-            	//System.err.println(POS); //DEBUG
+            	//System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (word too long)");
+            	System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (word too long)" + "[" + POS + "]"); //DEBUG
+            	continue; 
             }     
         
             // ta marbuta (U+0629) in forbidden position. It can go in second-to-last position when last is vowel
             if(toklen > 4 && (tok.substring(0, toklen-3).indexOf(TA_MARBUTA) != -1)) {
-            	System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (ta marbuta in the middle)");
-            	//System.err.println(POS); //DEBUG
+            	//System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (ta marbuta in the middle)");
+            	System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (ta marbuta in the middle)" + "[" + POS + "]"); //DEBUG
+            	continue; 
             }
 
             // there cannot be more than one vocalic diacritic together: "aa" (0x064e0x064e), "uu" (0x064f0x064f), "ii"(0x0650x0650)
             if(tok.contains("ََ") || tok.contains("ُُ") || tok.contains("ِِ")) {
-            	System.err.println("Error in scan \"" + name + "\": token \"" + tok + "\" contain 2 or more vocalic diacritics together");
-            	//System.err.println(POS); //DEBUG
+            	//System.err.println("Error in scan \"" + name + "\": token \"" + tok + "\" contain 2 or more vocalic diacritics together");
+            	System.err.println("Error in scan \"" + name + "\": token \"" + tok + "\" contain 2 or more vocalic diacritics together" + "[" + POS + "]"); //DEBUG
             }	
 		}
 	}

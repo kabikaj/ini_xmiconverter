@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.uima.UIMAException;
@@ -42,6 +43,19 @@ import webanno.custom.Section;
 * @author  alrazi
 * @version 1.0
 * @since   06/07/16 
+* 
+* NOTES
+* =====
+* - TAGSET: https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20%28GitHub%29/de.tudarmstadt.ukp.dkpro.core%24de.tudarmstadt.ukp.dkpro.core.doc-asl/doclinks/3/tagset-reference.html#tagset-ar-atb-pos141
+* - MODELS: https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20%28GitHub%29/de.tudarmstadt.ukp.dkpro.core%24de.tudarmstadt.ukp.dkpro.core.doc-asl/doclinks/3/model-reference.html#_ar_4
+* 
+* TODO
+* ====
+* - check POS annotation, PAT tagset, models (in notes). it fails with arabic puctuation! 
+* 
+* DEBUG
+* =====
+* - added [POS] info in the errorChecker() warnings
 */
 public class XmiConverter {
 	
@@ -167,41 +181,42 @@ public class XmiConverter {
 		while(tokens.hasNext())
 		{
 			Token tokObj = tokens.next();
-			
-			// skip punctuation
-			String POS = tokObj.getPos().getPosValue(); 
-			if(POS.equals("PUNC")) {  // IN, CC ??
-				continue;
-			}
-			
 			String tok = tokObj.getCoveredText();
 			int toklen = tok.length();
 			
+			// skip punctuation
+			String POS = tokObj.getPos().getPosValue(); 
+			//FIXME used a regex to skip punct with wrong POS annotation
+			//FIXME add other tags? IN, CC ??
+			if(POS.equals("PUNC") || Pattern.matches("([\\[\\]…\"§/«»❊؟،؛]|[٠-٩]+)", tok)) { //HACK
+				continue;
+			}
+			
 			// token is not a valid Arabic word
 			if(!isArabicAlpha(tok, true, true)) {
-				//System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (non-Arabic chars in token)");
-				System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (non-Arabic chars in token)" + "[" + POS + "]"); //DEBUG
+				System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (non-Arabic chars in token)");
+				//System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (non-Arabic chars in token)" + "[" + POS + "]"); //DEBUG
 				continue; // show token only once
 			}
 			    
             // exceeds max length
             if(toklen > MAX_LEN_TOK) {
-            	//System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (word too long)");
-            	System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (word too long)" + "[" + POS + "]"); //DEBUG
+            	System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (word too long)");
+            	//System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (word too long)" + "[" + POS + "]"); //DEBUG
             	continue; 
             }     
         
             // ta marbuta (U+0629) in forbidden position. It can go in second-to-last position when last is vowel
             if(toklen > 4 && (tok.substring(0, toklen-3).indexOf(TA_MARBUTA) != -1)) {
-            	//System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (ta marbuta in the middle)");
-            	System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (ta marbuta in the middle)" + "[" + POS + "]"); //DEBUG
+            	System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (ta marbuta in the middle)");
+            	//System.err.println("Warning in scan \"" + name + "\": token \"" + tok + "\" may contain a typo (ta marbuta in the middle)" + "[" + POS + "]"); //DEBUG
             	continue; 
             }
 
             // there cannot be more than one vocalic diacritic together: "aa" (0x064e0x064e), "uu" (0x064f0x064f), "ii"(0x0650x0650)
             if(tok.contains("ََ") || tok.contains("ُُ") || tok.contains("ِِ")) {
-            	//System.err.println("Error in scan \"" + name + "\": token \"" + tok + "\" contain 2 or more vocalic diacritics together");
-            	System.err.println("Error in scan \"" + name + "\": token \"" + tok + "\" contain 2 or more vocalic diacritics together" + "[" + POS + "]"); //DEBUG
+            	System.err.println("Error in scan \"" + name + "\": token \"" + tok + "\" contain 2 or more vocalic diacritics together");
+            	//System.err.println("Error in scan \"" + name + "\": token \"" + tok + "\" contain 2 or more vocalic diacritics together" + "[" + POS + "]"); //DEBUG
             }	
 		}
 	}
@@ -244,6 +259,7 @@ public class XmiConverter {
 		
 		    		AnalysisEngineDescription tagger = AnalysisEngineFactory.createEngineDescription(
 		    				StanfordPosTagger.class,
+		    				//StanfordPosTagger.PARAM_PRINT_TAGSET, true,  //DEBUG
 		    				SegmenterBase.PARAM_LANGUAGE, "ar");
 
 		    		AnalysisEngineDescription writer = AnalysisEngineFactory.createEngineDescription(
@@ -257,8 +273,6 @@ public class XmiConverter {
 		    	} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-		    
-		    			
 		    }
 		});
 

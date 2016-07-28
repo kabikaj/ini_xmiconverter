@@ -34,7 +34,9 @@ import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 * TODO
 * ====
 * - Check errors in POS annotation.
-* - Convert offsets too (aya|verse|hadith). But they need first a preprocessing. 
+* - Convert offsets too (aya|verse|hadith). But they need first a preprocessing.
+* - In a bunch of files, eg. 7-53-53-1-62, edu.stanford.ntl.process.PBTLexer next
+*   reports a warning> Untokenizable (U+200D, decimal 8205). Check this. 
 * 
 */
 public class XmiConverterAltafsir {

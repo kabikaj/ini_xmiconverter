@@ -57,7 +57,7 @@ import webanno.custom.Section;
 * =====
 * - added [POS] info in the errorChecker() warnings
 */
-public class XmiConverter {
+public class XmiConverterOcred {
 	
 	private static final char TA_MARBUTA = 'ة';
 	private static final char HAMZA = 'ء';
@@ -168,6 +168,16 @@ public class XmiConverter {
 		return true;		
 	}
 	
+	/**
+	 * Remove vowels and sukun from string s
+	 * @param s Text to modify
+	 * @return Modified text
+	 */
+	private static String removeVowels(String s) {
+		String modifs = s.replaceAll("[ًٌٍَُِْ]", "");
+		return modifs;
+	}
+	
     /**
 	 * Check if there are possible typos in the tokens of the document and report them
 	 * 
@@ -182,7 +192,7 @@ public class XmiConverter {
 		{
 			Token tokObj = tokens.next();
 			String tok = tokObj.getCoveredText();
-			int toklen = tok.length();
+			int toklen = removeVowels(tok).length();
 			
 			// skip punctuation
 			String POS = tokObj.getPos().getPosValue(); 

@@ -77,8 +77,8 @@ public class XmiConverterOcred {
 		Properties props = new Properties();
 		props.load(configReader);
 		
-		INPUT_PATH = props.getProperty("input_path");
-		OUTPUT_PATH =  props.getProperty("output_path");
+		INPUT_PATH = props.getProperty("input_path_ocred");
+		OUTPUT_PATH =  props.getProperty("output_path_ocred");
 		MAX_LEN_TOK = Integer.valueOf(props.getProperty("max_length_token"));
 	}
 	
@@ -244,7 +244,7 @@ public class XmiConverterOcred {
 		{
 		    if (Files.isRegularFile(filePath) && filePath.toString().endsWith(".json"))
 		    {
-		    	System.err.println("Processing file " + filePath.toString()); //DEBUG
+		    	System.err.println("\n** Processing file " + filePath.toString());
 		    	
 		    	try {
 		    		JSONParser parser = new JSONParser();

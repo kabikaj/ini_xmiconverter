@@ -30,6 +30,10 @@ import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 * @author  alrazi
 * @version 1.0
 * @since   28/07/16
+* 
+* usage:
+*   $ mvn clean dependency:copy-dependencies package
+*   $ java -cp target/dependency/*:target/xmiconverter-0.0.1-SNAPSHOT.jar xmiconverter/XmiConverterAltafsir
 *  
 * TODO
 * ====

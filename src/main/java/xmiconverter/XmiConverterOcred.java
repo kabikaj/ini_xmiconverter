@@ -44,6 +44,10 @@ import webanno.custom.Section;
 * @version 1.0
 * @since   06/07/16 
 * 
+* usage:
+*   $ mvn clean dependency:copy-dependencies package
+*   $ java -cp target/dependency/*:target/xmiconverter-0.0.1-SNAPSHOT.jar xmiconverter/XmiConverterOcred
+* 
 * NOTES
 * =====
 * - TAGSET: https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20%28GitHub%29/de.tudarmstadt.ukp.dkpro.core%24de.tudarmstadt.ukp.dkpro.core.doc-asl/doclinks/3/tagset-reference.html#tagset-ar-atb-pos141

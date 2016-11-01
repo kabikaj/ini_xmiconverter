@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Wed Jun 22 17:04:22 CEST 2016
+ * Updated by JCasGen Mon Oct 31 14:59:47 CET 2016
  * @generated */
 public class Page_Type extends Annotation_Type {
   /** @generated 

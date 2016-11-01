@@ -1,14 +1,20 @@
 Json to Xmi converter
 =====================
 
-Java program to convert json data extracted from COBHUNI wiki into xmi.
+Java program to convert json into xmi and xmi into json for the COBHUNI Corpus.
 
-* The section and page information is converted into offset annotations.
-* The text is tagged using the Stanford Parser configured for Arabic.
+https://www.cobhuni.uni-hamburg.de/
 
 ## Usage
 
+To convert source json files into xmi run:
+
 ```sh
-$ mvn clean dependency:copy-dependencies package
-$ java -cp target/dependency/*:target/xmiconverter-0.0.1-SNAPSHOT.jar xmiconverter/XmiConverter
+$ make xmiconvert
+```
+
+To convert annotated xmi files into json run:
+
+```sh
+$ make jsonconvert
 ```

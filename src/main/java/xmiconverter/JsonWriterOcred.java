@@ -15,7 +15,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package jsonconverter;
+package xmiconverter;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 

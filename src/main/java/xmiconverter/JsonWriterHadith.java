@@ -1,4 +1,4 @@
-package jsonconverter;
+package xmiconverter;
 
 public class JsonWriterHadith {
 

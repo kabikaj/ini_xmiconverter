@@ -1,9 +1,10 @@
 
 OCRED_FILES=../../data/original/ocred_texts/*.xmi
 ALTAFSIR_FILES=../../data/original/altafsir/*.xmi
+HADITH_FILES=../../data/original/hadith_alislam/*.xmi
 
-XMICONVERTER_JAR=target/dependency/*:target/xmiconverter-0.0.1-SNAPSHOT.jar
-JSONCONVERTER_JAR=target/dependency/*:target/jsonconverter-0.0.1-SNAPSHOT.jar
+CONVERT_JAR=target/dependency/*:target/xmiconverter-0.0.1-SNAPSHOT.jar
+PKG=xmiconverter
 
 RM=/bin/rm -f
 
@@ -31,34 +32,35 @@ help:
 	@echo "        Convert xmi to json for altafsir files"
 	@echo "    jsonconvert_hadith"
 	@echo "        Convert xmi to json for hadith alislam files"
-	@echo "\nPlease run \"make xmiconvert\" or \"jsonconvert\""
+	@echo ""
+	@echo "usage: make [help] (xmiconvert | jsonconvert)"
 
 clean:
 	mvn clean dependency:copy-dependencies package
 	$(RM) $(ALTAFSIR_FILES)
 	$(RM) $(OCRED_FILES)
 
+xmiconvert: clean xmiconvert_ocred xmiconvert_altafsir xmiconvert_hadith
+
+jsonconvert: clean jsonconvert_ocred jsonconvert_altafsir jsonconvert_hadith
+
 
 xmiconvert_ocred:	
-	java -cp $(XMICONVERTER_JAR) xmiconverter/XmiConverterOcred
+	java -cp $(CONVERT_JAR) $(PKG)/XmiConverterOcred
 
 xmiconvert_altafsir:
-	java -cp $(XMICONVERTER_JAR) xmiconverter/XmiConverterAltafsir
+	java -cp $(CONVERT_JAR) $(PKG)/XmiConverterAltafsir
 
 xmiconvert_hadith:
-	java -cp $(XMICONVERTER_JAR) xmiconverter/XmiConverterHadith
-
-xmiconvert: clean xmiconvert_ocred xmiconvert_altafsir xmiconvert_hadith
+	java -cp $(CONVERT_JAR) $(PKG)/XmiConverterHadith
 
 
 jsonconvert_ocred:	
-	java -cp $(JSONCONVERTER_JAR) jsonconverter/JsonConverterOcred
+	java -cp $(CONVERT_JAR) $(PKG)/JsonConverterOcred
 
 jsonconvert_altafsir:
-	java -cp $(JSONCONVERTER_JAR) jsonconverter/JsonConverterAltafsir
+	java -cp $(CONVERT_JAR) $(PKG)/JsonConverterAltafsir
 
 jsonconvert_hadith:
-	java -cp $(JSONCONVERTER_JAR) jsonconverter/JsonConverterHadith
-
-jsonconvert: clean jsonconvert_ocred jsonconvert_altafsir jsonconvert_hadith
+	java -cp $(CONVERT_JAR) $(PKG)/JsonConverterHadith
 

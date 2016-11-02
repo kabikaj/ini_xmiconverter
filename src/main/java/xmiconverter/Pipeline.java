@@ -1,4 +1,4 @@
-package jsonconverter;
+package xmiconverter;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
-
 import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiReader;
 import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;
 

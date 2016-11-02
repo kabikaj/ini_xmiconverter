@@ -27,9 +27,9 @@ import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 * Convert altafsir json files into xmi.
 * The text is tokenized, segmented and POS tagged. 
 *
-* @author  alrazi
+* @author  Alicia Gonzalez Martinez
 * @version 1.0
-* @since   28/07/16
+* @since   28.07.16
 * 
 * usage:
 *   $ mvn clean dependency:copy-dependencies package

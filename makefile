@@ -1,66 +1,47 @@
 
-OCRED_FILES=../../data/original/ocred_texts/*.xmi
-ALTAFSIR_FILES=../../data/original/altafsir/*.xmi
-HADITH_FILES=../../data/original/hadith_alislam/*.xmi
+PARENT_DIR=../../data/files/original
 
-CONVERT_JAR=target/dependency/*:target/xmiconverter-0.0.1-SNAPSHOT.jar
+OCRED_FILES=$(PARENT_DIR)/ocred_texts/*.xmi
+ALTAFSIR_FILES=$(PARENT_DIR)/altafsir/*.xmi
+HADITH_FILES=$(PARENT_DIR)/hadith_alislam/*.xmi
+
+JAR=target/dependency/*:target/xmiconverter-0.0.1-SNAPSHOT.jar
 PKG=xmiconverter
 
 RM=/bin/rm -f
+JAVA=java -cp $(JAR)
 
-.PHONY : all clean help xmiconvert_ocred xmiconvert_altafsir xmiconvert_hadith
-.PHONY : jsonconvert_ocred jsonconvert_altafsir jsonconvert_hadith
+.PHONY : all clean help convert_ocred convert_altafsir convert_hadith
+
+all: clean convert_ocred convert_altafsir convert_hadith
 
 help:
+	@echo "    all"
+	@echo "        Clean, get json files from sources, convert to xmi, and dump them into files/original/"
+	@echo "    convert_ocred"
+	@echo "        Convert only files from source ocred_texts"
+	@echo "    convert_altafsir"
+	@echo "        Convert only files from source altafsir"
+	@echo "    convert_hadith"
+	@echo "        Convert only files from source hadith_alislam"
 	@echo "    clean"
-	@echo "        Remove output xmi files"
-	@echo "    xmiconvert"
-	@echo "        Convert json to xmi files for all sources"
-	@echo "    jsonconvert"
-	@echo "        Convert xmi files to json for all sources"
+	@echo "         Clean resources and remove files from files/original/"
 	@echo ""
-	@echo "    xmiconvert_ocred"
-	@echo "        Convert source ocred json files to xmi"
-	@echo "    xmiconvert_altafsir"
-	@echo "        Convert source altafsir json files to xmi"
-	@echo "    xmiconvert_hadith"
-	@echo "        Convert source hadith alislam json files to xmi"
-	@echo ""
-	@echo "    jsonconvert_ocred"
-	@echo "        Convert xmi to json for ocred files"
-	@echo "    jsonconvert_altafsir"
-	@echo "        Convert xmi to json for altafsir files"
-	@echo "    jsonconvert_hadith"
-	@echo "        Convert xmi to json for hadith alislam files"
-	@echo ""
-	@echo "usage: make [help] (xmiconvert | jsonconvert)"
+	@echo "usage: make [help] [all] [convert_ocred] [convert_altafsir] [convert_hadith] [clean]"
 
 clean:
 	mvn clean dependency:copy-dependencies package
 	$(RM) $(ALTAFSIR_FILES)
 	$(RM) $(OCRED_FILES)
+	$(RM) $(HADITH_FILES)
 
-xmiconvert: clean xmiconvert_ocred xmiconvert_altafsir xmiconvert_hadith
+convert_ocred:	
+	$(JAVA) $(PKG)/XmiConverterOcred
 
-jsonconvert: clean jsonconvert_ocred jsonconvert_altafsir jsonconvert_hadith
+convert_altafsir:
+	$(JAVA) $(PKG)/XmiConverterAltafsir
 
+convert_hadith:
+	$(JAVA) $(PKG)/XmiConverterHadith
 
-xmiconvert_ocred:	
-	java -cp $(CONVERT_JAR) $(PKG)/XmiConverterOcred
-
-xmiconvert_altafsir:
-	java -cp $(CONVERT_JAR) $(PKG)/XmiConverterAltafsir
-
-xmiconvert_hadith:
-	java -cp $(CONVERT_JAR) $(PKG)/XmiConverterHadith
-
-
-jsonconvert_ocred:	
-	java -cp $(CONVERT_JAR) $(PKG)/JsonConverterOcred
-
-jsonconvert_altafsir:
-	java -cp $(CONVERT_JAR) $(PKG)/JsonConverterAltafsir
-
-jsonconvert_hadith:
-	java -cp $(CONVERT_JAR) $(PKG)/JsonConverterHadith
 

@@ -1,4 +1,4 @@
-package xmiconverter;
+package ini_xmiconverter;
 
 import java.io.File;
 import java.io.FileReader;

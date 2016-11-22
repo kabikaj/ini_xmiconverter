@@ -1,4 +1,4 @@
-package xmiconverter;
+package ini_xmiconverter;
 
 import java.io.File;
 import java.io.FileReader;
@@ -23,30 +23,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 
-/**
-* Convert altafsir json files into xmi.
-* The text is tokenized, segmented and POS tagged. 
-*
-* @author  Alicia Gonzalez Martinez
-* @version 1.0
-* @since   28.07.16
-* 
-* usage:
-*   $ mvn clean dependency:copy-dependencies package
-*   $ java -cp target/dependency/*:target/xmiconverter-0.0.1-SNAPSHOT.jar xmiconverter/XmiConverterAltafsir
-* 
-* NOTE
-* ====
-* - Skip (aya|verse|hadith) offsets.
-*  
-* TODO
-* ====
-* - Check errors in POS annotation.
-* - In a bunch of files, eg. 7-53-53-1-62, edu.stanford.ntl.process.PBTLexer next
-*   reports a warning> Untokenizable (U+200D, decimal 8205). Check this. 
-* 
-*/
-public class XmiConverterAltafsir {
+public class XmiConverterHadith {
 
 	private static String INPUT_PATH;
 	private static String OUTPUT_PATH;
@@ -61,8 +38,8 @@ public class XmiConverterAltafsir {
 		Properties props = new Properties();
 		props.load(configReader);
 		
-		INPUT_PATH = props.getProperty("input_path_altafsir");
-		OUTPUT_PATH =  props.getProperty("output_path_altafsir");
+		INPUT_PATH = props.getProperty("input_path_hadith");
+		OUTPUT_PATH =  props.getProperty("output_path_hadith");
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -87,7 +64,7 @@ public class XmiConverterAltafsir {
 		    		dmd.setCollectionId("cobhuni");
 		    		dmd.setDocumentId(FilenameUtils.removeExtension(filePath.getFileName().toString()));
 
-		    		document.setDocumentText((String) jsonObject.get("text"));
+		    		document.setDocumentText((String) jsonObject.get("commentary"));
 		
 		    		AnalysisEngineDescription segmenter = AnalysisEngineFactory.createEngineDescription(
 		    				StanfordSegmenter.class,
@@ -109,7 +86,6 @@ public class XmiConverterAltafsir {
 				}
 		    }
 		});
-
 
 	}
 

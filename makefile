@@ -5,8 +5,8 @@ OCRED_FILES=$(PARENT_DIR)/ocred_texts/*.xmi
 ALTAFSIR_FILES=$(PARENT_DIR)/altafsir/*.xmi
 HADITH_FILES=$(PARENT_DIR)/hadith_alislam/*.xmi
 
-JAR=target/dependency/*:target/xmiconverter-0.0.1-SNAPSHOT.jar
-PKG=xmiconverter
+JAR=target/dependency/*:target/ini_xmiconverter-0.0.1-SNAPSHOT.jar
+PKG=ini_xmiconverter
 
 RM=/bin/rm -f
 JAVA=java -cp $(JAR)

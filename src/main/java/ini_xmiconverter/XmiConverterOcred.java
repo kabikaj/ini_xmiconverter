@@ -45,7 +45,7 @@ import webanno.custom.Section;
 * 
 * usage:
 *   $ mvn clean dependency:copy-dependencies package
-*   $ java -cp target/dependency/*:target/xmiconverter-0.0.1-SNAPSHOT.jar xmiconverter/XmiConverterOcred
+*   $ java -cp target/dependency/*:target/ini_xmiconverter-0.0.1-SNAPSHOT.jar ini_xmiconverter/XmiConverterOcred
 * 
 * NOTES
 * =====

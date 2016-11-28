@@ -1,20 +1,12 @@
-Json to Xmi converter
+Initial XMI Converter
 =====================
 
-Java program to convert json into xmi and xmi into json for the COBHUNI Corpus.
+Java program to perform the initial conversion of json files into xmi for the COBHUNI Corpus before the annotation phase.
 
 https://www.cobhuni.uni-hamburg.de/
 
 ## Usage
 
-To convert source json files into xmi run:
-
 ```sh
-$ make xmiconvert
-```
-
-To convert annotated xmi files into json run:
-
-```sh
-$ make jsonconvert
+$ make
 ```

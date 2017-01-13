@@ -155,11 +155,8 @@ public class XmiConverterOcred {
 		    }
 
 		    // char is tatweel
-		    if((int) chr == 0x640)
+		    if(((int) chr == 0x640) && (ignoreTatweel == false))
 		    {
-		    	if(ignoreTatweel == true) {
-		    		continue;
-		    	}
 		    	return false;
 		    }
 		    

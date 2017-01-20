@@ -1,3 +1,18 @@
+/* Copyright 2016 Alicia Gonzalez Martinez
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
 package ini_xmiconverter;
 
 import java.io.File;
@@ -39,7 +54,7 @@ import webanno.custom.Section;
 * Convert json files containing text and annotation offsets into
 * enriched xmi file. The text is tokenized, segmented and POS tagged. 
 *
-* @author  alrazi
+* @author  Alicia Gonzalez Martinez
 * @version 1.0
 * @since   06/07/16 
 * 
@@ -54,11 +69,7 @@ import webanno.custom.Section;
 * 
 * TODO
 * ====
-* - check POS annotation, PAT tagset, models (in notes). it fails with arabic puctuation! 
-* 
-* DEBUG
-* =====
-* - added [POS] info in the errorChecker() warnings
+* - Check POS annotation, PAT tagset, models (in notes). it fails with Arabic puctuation! 
 */
 public class XmiConverterOcred {
 	
@@ -199,8 +210,7 @@ public class XmiConverterOcred {
 			
 			// skip punctuation
 			String POS = tokObj.getPos().getPosValue(); 
-			//FIXME used a regex to skip punct with wrong POS annotation
-			//FIXME add other tags? IN, CC ??
+			//FIXME used a regex to skip punct with wrong POS annotation. perhaps add other tags such as IN, CC??
 			if(POS.equals("PUNC") || Pattern.matches("([\\[\\]…\"§/«»❊؟،؛]|[٠-٩]+)", tok)) { //HACK
 				continue;
 			}

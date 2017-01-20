@@ -17,7 +17,7 @@ all: clean convert_ocred convert_altafsir convert_hadith
 
 help:
 	@echo "    all"
-	@echo "        Clean, get json files from sources, convert to xmi, and dump them into files/original/"
+	@echo "        Clean, get json files from sources, convert to xmi, and dump them into output_path [DEFAULT"]
 	@echo "    convert_ocred"
 	@echo "        Convert only files from source ocred_texts"
 	@echo "    convert_altafsir"
@@ -25,7 +25,7 @@ help:
 	@echo "    convert_hadith"
 	@echo "        Convert only files from source hadith_alislam"
 	@echo "    clean"
-	@echo "         Clean resources and remove files from files/original/"
+	@echo "         Clean resources and remove files from output_path"
 	@echo ""
 	@echo "usage: make [help] [all] [convert_ocred] [convert_altafsir] [convert_hadith] [clean]"
 

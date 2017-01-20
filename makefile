@@ -1,9 +1,17 @@
 
 PARENT_DIR=../../data/files/original
+#NOTE use for testing
+#PARENT_DIR=tests/output
 
 OCRED_FILES=$(PARENT_DIR)/ocred_texts/*.xmi
+#NOTE use for testing
+#OCRED_FILES=$(PARENT_DIR)/ocred/*.xmi
 ALTAFSIR_FILES=$(PARENT_DIR)/altafsir/*.xmi
+#NOTE use for testing
+#ALTAFSIR_FILES=$(PARENT_DIR)/altafsir/*.xmi
 HADITH_FILES=$(PARENT_DIR)/hadith_alislam/*.xmi
+#NOTE use for testing
+#HADITH_FILES=$(PARENT_DIR)/hadith/*.xmi
 
 JAR=target/dependency/*:target/ini_xmiconverter-0.0.1-SNAPSHOT.jar
 PKG=ini_xmiconverter

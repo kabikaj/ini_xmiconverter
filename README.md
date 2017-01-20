@@ -2,6 +2,7 @@ Initial XMI Converter
 =====================
 
 Java program to perform the initial conversion of json files into xmi for preparing the annotation phase of the COBHUNI Corpus.
+
 To change the paths for the input and output files edit *config.properties*.
 
 ## Usage
@@ -12,11 +13,13 @@ $ make
 ## Author
 
 Alicia Gonález Martínez
+
 The COBHUNI Project - Universität Hamburg
 
 ## Webpages
 
 https://www.cobhuni.uni-hamburg.de/
+
 https://gitlab.com/alrazi/ini_xmiconverter/
 
 ## License

@@ -12,15 +12,9 @@ $ make
 ```
 ## Author
 
-Alicia Gonález Martínez
+Alicia Gonález Martínez - https://gitlab.com/alrazi/ini_xmiconverter/
 
-The COBHUNI Project - Universität Hamburg
-
-## Webpages
-
-https://www.cobhuni.uni-hamburg.de/
-
-https://gitlab.com/alrazi/ini_xmiconverter/
+The COBHUNI Project - Universität Hamburg - https://www.cobhuni.uni-hamburg.de/
 
 ## License
 
